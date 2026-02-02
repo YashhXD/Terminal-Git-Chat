@@ -1,5 +1,5 @@
 # GitHub CLI Chat
-A terminal-based chat application that uses a GitHub repository as a shared message store. Anyone who clones the repo can participate in the chat!
+A CLI chat application that uses a GitHub repository as a shared message database. Anyone who clones the repo can join the conversation!
 ## How It Works
 1. All messages are stored in `chat.txt` in the repository
 2. When you send a message, it automatically commits and pushes to GitHub
@@ -7,9 +7,9 @@ A terminal-based chat application that uses a GitHub repository as a shared mess
 4. Other users pull changes to see new messages
 ## Setup
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js
 - Git installed and configured
-- A GitHub repository (can be this one or a new one)
+- A GitHub repository (clone this or create your new one)
 ### Installation
 1. Clone the repository:
 ```bash
@@ -26,7 +26,7 @@ npm start
 ```
 ## Usage
 ### First Time
-When you run the app for the first time, you'll be prompted to enter a display name. This name will be shown with your messages.
+When you start the app for the very first time, you'll be prompted to enter your name. This name will be displayed before your messages.
 ### Commands
 | Command | Description |
 |---------|-------------|
@@ -42,19 +42,17 @@ The app automatically:
 - Pulls new messages every 10 seconds
 - Pushes your messages immediately when you send them
 ## Chat File Format
-Messages are stored in `chat.txt` with this format:
+Messages are saved in `chat.txt` with this format:
 ```
-[2024-01-15 14:30:25] Alice: Hello everyone!
-[2024-01-15 14:30:45] Bob: Hey Alice, welcome!
+[2024-01-15 14:30:25] Yash: Hola amigo!
+[2024-01-15 14:30:45] Krishna: Hey Yash, wassup!
 ```
 ## Troubleshooting
 ### Push/Pull Errors
-- Make sure you have write access to the repository
-- Ensure your Git credentials are configured
+- Make sure you have commit permission of the repository.
+- Ensure you are logged in with your Git credentials
 - Check your internet connection
-### Merge Conflicts
-If you get merge conflicts, the app will try to auto-resolve them. If it can't, you may need to manually resolve the conflict in `chat.txt`.
+### Merge Conflict
+In case of merge conflict, the app will firstly try to automatically resolve them. If it can't, you may need to run `/refresh`.
 ## Contributing
-Feel free to fork and improve this chat app!
-## License
-MIT
+Feel free to fork and help me improve this chat app to eradicate the dependency on big tech companies for just chatting !
