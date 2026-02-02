@@ -1,13 +1,10 @@
-#!/usr/bin/env node
 const { execSync, exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
-// Configuration
 const CHAT_FILE = path.join(__dirname, 'chat.txt');
 const CONFIG_FILE = path.join(__dirname, '.chatconfig.json');
-const SYNC_INTERVAL = 10000; // 10 seconds
-// ANSI color codes (works without chalk dependency)
+const SYNC_INTERVAL = 10000;
 const colors = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
@@ -21,7 +18,6 @@ const colors = {
   white: '\x1b[37m',
   bgBlue: '\x1b[44m',
 };
-// User colors for different chatters
 const userColors = [colors.cyan, colors.magenta, colors.yellow, colors.green, colors.blue];
 const userColorMap = new Map();
 let colorIndex = 0;
@@ -32,14 +28,12 @@ function getUserColor(username) {
   }
   return userColorMap.get(username);
 }
-// Load or create config
 function loadConfig() {
   try {
     if (fs.existsSync(CONFIG_FILE)) {
       return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
     }
   } catch (e) {
-    // Config file corrupted, create new one
   }
   return null;
 }

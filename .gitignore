@@ -1,7 +1,4 @@
-# User config (contains display name)
 .chatconfig.json
-# Dependencies
 node_modules/
-# OS files
 .DS_Store
 Thumbs.db
