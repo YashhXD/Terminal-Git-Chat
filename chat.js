@@ -40,7 +40,6 @@ function loadConfig() {
 function saveConfig(config) {
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
 }
-// Git operations
 function gitPull() {
   try {
     execSync('git pull --rebase', { 
@@ -50,7 +49,6 @@ function gitPull() {
     });
     return true;
   } catch (error) {
-    // Try to handle merge conflicts
     try {
       execSync('git rebase --abort', { cwd: __dirname, stdio: 'pipe' });
       execSync('git pull', { cwd: __dirname, stdio: 'pipe' });
@@ -67,7 +65,6 @@ function gitPush(message) {
     execSync('git push', { cwd: __dirname, stdio: 'pipe' });
     return true;
   } catch (error) {
-    // If push fails, try pull and push again
     try {
       gitPull();
       execSync('git push', { cwd: __dirname, stdio: 'pipe' });
@@ -77,14 +74,12 @@ function gitPush(message) {
     }
   }
 }
-// Chat file operations
 function readMessages() {
   try {
     if (fs.existsSync(CHAT_FILE)) {
       return fs.readFileSync(CHAT_FILE, 'utf8');
     }
   } catch (e) {
-    // File doesn't exist yet
   }
   return '';
 }
@@ -109,7 +104,6 @@ function getUniqueUsers() {
   
   return Array.from(users);
 }
-// Display functions
 function clearScreen() {
   console.clear();
 }
@@ -160,12 +154,9 @@ function printStatus(message, type = 'info') {
   };
   console.log(`${colorMap[type]}${colors.dim}[${type.toUpperCase()}]${colors.reset} ${message}`);
 }
-// Main chat application
 async function main() {
   clearScreen();
   printHeader();
-  
-  // Check if we're in a git repository
   try {
     execSync('git rev-parse --is-inside-work-tree', { cwd: __dirname, stdio: 'pipe' });
   } catch (e) {
@@ -173,18 +164,13 @@ async function main() {
     console.log('Please clone the repository first or initialize Git.');
     process.exit(1);
   }
-  
-  // Load or create user config
   let config = loadConfig();
-  
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
   
   const question = (prompt) => new Promise(resolve => rl.question(prompt, resolve));
-  
-  // First-time setup: get username
   if (!config || !config.username) {
     console.log(`${colors.cyan}Welcome to GitHub CLI Chat!${colors.reset}\n`);
     const username = await question(`${colors.yellow}Enter your display name: ${colors.reset}`);
@@ -201,12 +187,8 @@ async function main() {
   } else {
     console.log(`${colors.green}Welcome back, ${config.username}!${colors.reset}\n`);
   }
-  
-  // Initial sync
   printStatus('Syncing messages...', 'info');
   gitPull();
-  
-  // Display existing messages
   let content = readMessages();
   let lastLineCount = 0;
   
@@ -217,8 +199,6 @@ async function main() {
   } else {
     console.log(`${colors.dim}No messages yet. Be the first to say hello!${colors.reset}\n`);
   }
-  
-  // Auto-sync interval
   const syncInterval = setInterval(() => {
     gitPull();
     const newContent = readMessages();
@@ -228,8 +208,6 @@ async function main() {
       lastLineCount = newLineCount;
     }
   }, SYNC_INTERVAL);
-  
-  // Input prompt
   const promptUser = () => {
     rl.question(`${colors.green}${config.username}${colors.reset}> `, async (input) => {
       const trimmedInput = input.trim();
@@ -238,8 +216,6 @@ async function main() {
         promptUser();
         return;
       }
-      
-      // Handle commands
       if (trimmedInput.startsWith('/')) {
         const [command, ...args] = trimmedInput.slice(1).split(' ');
         
@@ -305,17 +281,12 @@ async function main() {
             printStatus(`Unknown command: /${command}. Type /help for available commands.`, 'warning');
         }
       } else {
-        // Send message
         appendMessage(config.username, trimmedInput);
-        
-        // Update local state
         content = readMessages();
         lastLineCount = content.split('\n').filter(l => l.trim()).length;
-        
-        // Push to GitHub
         printStatus('Sending...', 'info');
         if (gitPush(`chat: ${config.username} sent a message`)) {
-          process.stdout.write('\x1b[1A\x1b[2K'); // Clear the "Sending..." line
+          process.stdout.write('\x1b[1A\x1b[2K');
           const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
           console.log(
             `${colors.dim}[${timestamp}]${colors.reset} ` +
@@ -335,12 +306,10 @@ async function main() {
   console.log('');
   promptUser();
 }
-// Handle graceful shutdown
 process.on('SIGINT', () => {
   console.log(`\n${colors.yellow}Interrupted. Goodbye! 👋${colors.reset}`);
   process.exit(0);
 });
-// Run the app
 main().catch(error => {
   console.error(`${colors.red}Fatal error:${colors.reset}`, error.message);
   process.exit(1);
