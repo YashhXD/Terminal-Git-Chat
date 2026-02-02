@@ -26,7 +26,7 @@ npm start
 ```
 ## Usage
 ### First Time
-When you start the app for the very first time, you'll be prompted to enter your name. This name will be displayed before your messages.
+When you start the app for the very first time, you'll be required to enter your name. This name will be displayed before your messages.
 ### Commands
 | Command | Description |
 |---------|-------------|
@@ -56,3 +56,4 @@ Messages are saved in `chat.txt` with this format:
 In case of merge conflict, the app will firstly try to automatically resolve them. If it can't, you may need to run `/refresh`.
 ## Contributing
 Feel free to fork and help me improve this chat app to eradicate the dependency on big tech companies for just chatting !
+
