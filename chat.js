@@ -110,7 +110,7 @@ function clearScreen() {
 function printHeader() {
   console.log(`${colors.bgBlue}${colors.white}${colors.bright}`);
   console.log('╔════════════════════════════════════════════════════════════╗');
-  console.log('║                   🗿Terminal GIT Chat                      ║');
+  console.log('║                   🗿  Terminal GIT Chat                    ║');
   console.log('║     Type /help for commands • Messages sync via Git        ║');
   console.log('╚════════════════════════════════════════════════════════════╝');
   console.log(`${colors.reset}\n`);
