@@ -314,4 +314,3 @@ main().catch(error => {
   console.error(`${colors.red}Fatal error:${colors.reset}`, error.message);
   process.exit(1);
 });
-//hello everyone
