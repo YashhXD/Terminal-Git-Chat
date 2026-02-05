@@ -1,8 +1,1 @@
 [2025-02-02 00:00:00] System: Welcome to GitHub CLI Chat! 🚀
-<<<<<<< HEAD
-[2026-02-05 07:06:33] Krishna: hola
-=======
-[2026-02-05 07:06:25] Yash: hey
->>>>>>> b5e87e28bd78fb19bf58aa20a5f99e7041544ae4
-[2026-02-05 07:06:47] Krishna: hola
-[2026-02-05 07:07:01] Krishna: hola
