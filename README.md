@@ -1,5 +1,5 @@
-# GitHub CLI Chat
-A CLI chat application that uses a GitHub repository as a shared message database. Anyone who clones the repo can join the conversation!
+# Terminal Git Chat
+The Terminal Git chat application that uses a GitHub repository as a shared message database. Anyone who clones the repo can join the conversation!
 ## How It Works
 1. All messages are stored in `chat.txt` in the repository
 2. When you send a message, it automatically commits and pushes to GitHub
@@ -56,5 +56,6 @@ Messages are saved in `chat.txt` with this format:
 In case of merge conflict, the app will firstly try to automatically resolve them. If it can't, you may need to run `/refresh`.
 ## Contributing
 Feel free to fork and help me improve this chat app to eradicate the dependency on big tech companies for just chatting !
+
 
 
