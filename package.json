@@ -1,7 +1,7 @@
 {
   "name": "github-cli-chat",
   "version": "1.0.0",
-  "description": "A CLI chat application that uses GitHub as a message store",
+  "description": "A CLI chat application that uses GitHub as a message database and request processing",
   "main": "chat.js",
   "scripts": {
     "start": "node chat.js"
