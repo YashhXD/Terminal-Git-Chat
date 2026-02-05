@@ -13,8 +13,8 @@ A CLI chat application that uses a GitHub repository as a shared message databas
 ### Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO/cli-chat
+git clone https://github.com/YashhXD/Terminal-Git-Chat.git
+cd Terminal-Git-Chat
 ```
 2. Install dependencies:
 ```bash
@@ -56,4 +56,5 @@ Messages are saved in `chat.txt` with this format:
 In case of merge conflict, the app will firstly try to automatically resolve them. If it can't, you may need to run `/refresh`.
 ## Contributing
 Feel free to fork and help me improve this chat app to eradicate the dependency on big tech companies for just chatting !
+
 
